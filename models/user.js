@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
         maxlength:50
     },
     email: {
-        tpye: String, 
+        type: String, 
         trim: true,
         unique: 1
     },
@@ -30,6 +30,10 @@ const userSchema = mongoose.Schema({
     }
 })
 
-const User = mogoose.model('User', userSchema)
+
+
+// module.exports =  mongoose.model('User', UserSchema)
+
+const User = mongoose.model('User', userSchema);
 
 module.exports = { User }

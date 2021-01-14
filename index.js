@@ -1,18 +1,36 @@
+const cookieParser = require("cookie-parser");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb+srv://jaba:jaba123@cluster0.fmrs8.mongodb.net/<dbname>?retryWrites=true&w=majority', 
- {useNewUrlParser:true, useUnifiedTopology: true})
- .then(()=> console.log("DB connected"))
- .catch(err => console.errror(err));
+const { User } = require("./models/user.js");
 
+const config  = require("./config/key");
 
-app.get("/",(req, res) => {
-    res.send("Hello World");
+console.log("hello " + config.mongoURI, config);
+
+mongoose
+  .connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("DB connected"))
+  .catch((err) => console.errror(err));
+
+app.get("/", (req, res) => {
+  res.send("Hello Worlsd");
 });
 
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(cookieParser());
 
+app.post("/api/users/register", (req, res) => {
+  const user = new User(req.body);
 
+  console.log(req.body);
 
-app.listen(5000)
+  user.save((err, userData) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).json({ success: true });
+  });
+});
+
+app.listen(5000);
