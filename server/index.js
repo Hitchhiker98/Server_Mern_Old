@@ -20,6 +20,10 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cookieParser());
 
+app.get("/", (req, res) => {
+  res.json({hello: "hello sire"});
+})
+
 app.get("/api/user/auth", auth, (req, res) => {
   res.status(200).json({
     _id: req._id,
