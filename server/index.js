@@ -5,11 +5,11 @@ const mongoose = require("mongoose");
 
 const { User } = require("./models/user.js");
 const auth = require("./middleware/auth");
-console.log(auth);
+
 
 const config = require("./config/key");
 
-console.log("hello " + config.mongoURI, config);
+
 
 mongoose
   .connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -73,4 +73,12 @@ app.get("/api/users/logout", auth, (req, res) => {
   });
 });
 
-app.listen(5000);
+
+
+const port = process.env.PORT || 5000
+
+app.listen(port,() => {
+  console.log(`Server Running at ${port}`)
+});
+
+
