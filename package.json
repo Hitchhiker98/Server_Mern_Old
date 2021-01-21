@@ -4,14 +4,16 @@
   "description": "server boiler-plate",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "backend": "nodemon index.js"
+    "start": "node server/index.js",
+    "backend": "nodemon server/index.js"
   },
   "author": "Giorgi Giorgadze",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.4.20"
   },
   "devDependencies": {
