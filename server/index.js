@@ -12,19 +12,19 @@ const config = require("./config/key");
 
 
 mongoose
-  .connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("DB connected"))
-  .catch((err) => console.errror(err));
+  .connect(config.mongoURI, {dbName: "SingUp"}, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("DB connected HERE HEREHERE"))
+  .catch((err) => console.log(err));
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true}));
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.json({hello: "hello sire"});
 })
 
-app.get("/api/user/auth", auth, (req, res) => {
+app.get("/api/users/auth", auth, (req, res) => {
   res.status(200).json({
     _id: req._id,
     isAuth: true,
